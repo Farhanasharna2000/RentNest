@@ -40,10 +40,14 @@ RentNest-fullstack/
 │   ├── package.json
 │   ├── next.config.ts
 │   └── tailwind.config.ts
-├── API_INTEGRATION.md
+├── docs/
+│   └── API_INTEGRATION.md
+├── .claude/
+│   ├── agents/
+│   └── skills/
+├── .githooks/
+├── CLAUDE.md
 ├── README.md
-├── Requirements.md
-├── Requirements2.md
 └── .gitignore
 ```
 
@@ -91,7 +95,7 @@ Before running the project, make sure you have installed:
 ### Backend
 Create a `.env` file inside the `backend` folder.
 
-Example:
+Copy `backend/.env.example` and fill in real values:
 
 ```env
 PORT=5000
@@ -120,14 +124,20 @@ NEXT_PUBLIC_API_URL=http://localhost:5000/api
 
 ## Installation
 
-### 1) Install backend dependencies
+### 1) Enable git hooks
+
+```bash
+git config core.hooksPath .githooks
+```
+
+### 2) Install backend dependencies
 
 ```bash
 cd backend
 npm install
 ```
 
-### 2) Install frontend dependencies
+### 3) Install frontend dependencies
 
 ```bash
 cd frontend
@@ -205,7 +215,7 @@ npm run lint
 
 ## API Integration Notes
 
-This project includes a route map and integration notes in [API_INTEGRATION.md](API_INTEGRATION.md). That document describes the current backend and frontend contract, including auth, properties, landlord actions, payments, and admin routes.
+This project includes a route map and integration notes in [docs/API_INTEGRATION.md](docs/API_INTEGRATION.md). That document describes the current backend and frontend contract, including auth, properties, landlord actions, payments, and admin routes.
 
 ---
 
@@ -224,9 +234,20 @@ The project is set up for Vercel deployment in the frontend and backend config f
 
 ---
 
+## Git Hooks
+
+The repo ships commit hooks in `.githooks/` that keep commit messages and authors clean.
+Enable them once after cloning:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+---
+
 ## License
 
-This project is for educational and portfolio use unless otherwise specified by the project owner.
+All rights reserved by the project owner unless a license file states otherwise.
 
 ---
 
@@ -234,6 +255,6 @@ This project is for educational and portfolio use unless otherwise specified by 
 
 - Frontend: http://localhost:3000
 - Backend: http://localhost:5000
-- API guide: [API_INTEGRATION.md](API_INTEGRATION.md)
+- API guide: [docs/API_INTEGRATION.md](docs/API_INTEGRATION.md)
 
 If you are working on this project, start with the backend environment setup and then run the frontend to connect the app to the API.

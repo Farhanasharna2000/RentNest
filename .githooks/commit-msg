@@ -1,0 +1,22 @@
+#!/bin/sh
+# Strip AI tool attribution from commit messages.
+# Portable across GNU and BSD sed (writes to a temp file instead of sed -i).
+MSG_FILE="$1"
+TMP_FILE="$(mktemp)"
+
+sed \
+  -e '/^[[:space:]]*[Cc]o-[Aa]uthored-[Bb]y:/d' \
+  -e '/^[[:space:]]*[Mm]ade-with:[[:space:]]*[Cc]ursor/d' \
+  -e '/^[[:space:]]*[Gg]enerated by [Cc]ursor/d' \
+  -e '/^[[:space:]]*[Cc]reated with [Cc]ursor/d' \
+  -e '/[Cc]ursor AI/d' \
+  -e '/[Cc]ursor[- ][Aa]gent/d' \
+  -e '/^[[:space:]]*[Aa]uthor.*[Cc]ursor/d' \
+  -e '/^[[:space:]]*[Gg]enerated by.*AI/d' \
+  -e '/^[[:space:]]*[Gg]enerated with.*[Cc]laude/d' \
+  -e '/^[[:space:]]*[Cc]reated with.*AI/d' \
+  "$MSG_FILE" > "$TMP_FILE"
+
+# Remove trailing blank lines left behind.
+sed -e :a -e '/^\n*$/{$d;N;ba' -e '}' "$TMP_FILE" > "$MSG_FILE"
+rm -f "$TMP_FILE"
