@@ -1,12 +1,12 @@
 {
-  "name": "a4",
+  "name": "rentnest-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "RentNest REST API (Express, Prisma, PostgreSQL)",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
+    "dev": "node init && tsx watch src/server.ts",
     "test": "tsx --test src/**/*.test.ts",
-    "build": "prisma generate && tsup",
+    "build": "node init && prisma generate && tsup",
     "deploy": "npm run build && vercel --prod",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev"
@@ -39,8 +39,8 @@
     "stripe": "^22.4.0"
   },
   "overrides": {
-  "tsup": {
-    "esbuild": "0.28.1"
+    "tsup": {
+      "esbuild": "0.28.1"
+    }
   }
-}
 }
